@@ -25,7 +25,7 @@ jobs:
     needs: [find_exercise]
     env:
       ISSUE_REPOSITORY: ${{ github.repository }}
-      ISSUE_NUMBER: ${{ needs.find_exercise.outputs.issue-number }}
+     
 
     steps:
       - name: Checkout
@@ -43,14 +43,14 @@ jobs:
         uses: peter-evans/find-comment@v3
         with:
           repository: ${{ env.ISSUE_REPOSITORY }}
-          issue-number: ${{ env.ISSUE_NUMBER }}
+         
           direction: last
 
       - name: Update comment - checking work
         uses: GrantBirki/comment@v2.1.1
         with:
           repository: ${{ env.ISSUE_REPOSITORY }}
-          issue-number: ${{ env.ISSUE_NUMBER }}
+          
           comment-id: ${{ steps.find-last-comment.outputs.comment-id }}
           file: exercise-toolkit/markdown-templates/step-feedback/checking-work.md
           edit-mode: replace
